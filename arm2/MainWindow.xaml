@@ -42,7 +42,7 @@
             </Grid>
         </DockPanel>
         <DockPanel VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <Button Margin="50" Height="54" Width="75">Connect</Button>
+            <Button Margin="50" Height="30" Width="75">Connect</Button>
         </DockPanel>
     </Grid>
 </Window>
