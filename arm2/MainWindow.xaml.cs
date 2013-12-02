@@ -25,7 +25,7 @@ namespace arm2
             InitializeComponent();
         }
 
-        private void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void Base_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             currentStatus.Content = e.NewValue.ToString();
             RotateTransform rotate = new RotateTransform((e.NewValue) * 360);
@@ -34,5 +34,14 @@ namespace arm2
             armTopViewPolyline.RenderTransform = rotate;
         }
 
+        private void FirstArm_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+        private void SecondArm_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }
