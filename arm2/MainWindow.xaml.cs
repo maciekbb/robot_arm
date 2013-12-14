@@ -20,10 +20,10 @@ namespace arm2
     /// </summary>
     public partial class MainWindow : Window
     {
-        private double TransitionX = 0;
-        private double TransitionY = 0;
-        private double BetweenAngle = 0;
-        private double FirstChange = 0;
+        private double transitionX = 0;
+        private double transitionY = 0;
+        private double betweenArmsAngle = 0;
+        private double baseAngle = 0;
 
         public MainWindow()
         {
@@ -57,19 +57,19 @@ namespace arm2
         void MoveFirstArm(double e) {
             Grid canvas = armSideViewPolygon1.Parent as Grid;
             RotateTransform rotate = new RotateTransform(-(e) * 135);
-            FirstChange = e;
+            baseAngle = e;
             rotate.CenterX = canvas.Width / 2;
             rotate.CenterY = canvas.Height / 2 + 20;
             armSideViewPolygon1.RenderTransform = rotate;
 
             TransformGroup allTransforms = new TransformGroup();
-            TransitionX = 60*Math.Cos(-(e)*2.36)-60;
-            TransitionY = 60*Math.Sin(-(e)*2.36);
+            transitionX = 60*Math.Cos(-(e)*2.36)-60;
+            transitionY = 60*Math.Sin(-(e)*2.36);
            
-            RotateTransform rotate2 = new RotateTransform(-(e-BetweenAngle) * 135);
-            rotate2.CenterX = canvas.Width / 2 + 50 + TransitionX;
-            rotate2.CenterY = canvas.Height / 2 + 20 + TransitionY;
-            allTransforms.Children.Add(new TranslateTransform(TransitionX, TransitionY));
+            RotateTransform rotate2 = new RotateTransform(-(e-betweenArmsAngle) * 135);
+            rotate2.CenterX = canvas.Width / 2 + 50 + transitionX;
+            rotate2.CenterY = canvas.Height / 2 + 20 + transitionY;
+            allTransforms.Children.Add(new TranslateTransform(transitionX, transitionY));
             allTransforms.Children.Add(rotate2);
 
             armSideViewPolygon2.RenderTransform = allTransforms;
@@ -79,11 +79,11 @@ namespace arm2
         {
               TransformGroup allTransforms = new TransformGroup();
               Grid canvas = armSideViewPolygon2.Parent as Grid;
-              RotateTransform rotate = new RotateTransform((e - FirstChange) * 135);
-              BetweenAngle = e;
-              rotate.CenterX = canvas.Width / 2 + 50 + TransitionX;
-              rotate.CenterY = canvas.Height / 2 + 20 + TransitionY;
-              allTransforms.Children.Add(new TranslateTransform(TransitionX, TransitionY));
+              RotateTransform rotate = new RotateTransform((e - baseAngle) * 135);
+              betweenArmsAngle = e;
+              rotate.CenterX = canvas.Width / 2 + 50 + transitionX;
+              rotate.CenterY = canvas.Height / 2 + 20 + transitionY;
+              allTransforms.Children.Add(new TranslateTransform(transitionX, transitionY));
               allTransforms.Children.Add(rotate);
 
               armSideViewPolygon2.RenderTransform = allTransforms;
