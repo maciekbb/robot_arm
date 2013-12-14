@@ -27,7 +27,7 @@ namespace arm2
 
         private void Base_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            currentStatus.Content = e.NewValue.ToString();
+            //currentStatus.Content = e.NewValue.ToString();
             RotateTransform rotate = new RotateTransform((e.NewValue) * 360);
             rotate.CenterX = 150;
             rotate.CenterY = 170;
