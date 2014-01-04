@@ -2,12 +2,20 @@
 
 #pragma once
 
+#include "usb.h"
+
 using namespace System;
 
-namespace Arm2 {
+namespace Arm2 
+{
 
 	public ref class Arm2Device
 	{
-		// TODO: Add your methods for this class here.
+	private:
+		struct usb_dev_handle* handle;
+	public:
+		Arm2Device();
+		bool Open();
+		void Close();
 	};
 }

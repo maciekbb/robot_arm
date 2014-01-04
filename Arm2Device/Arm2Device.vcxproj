@@ -79,6 +79,7 @@
     <ClInclude Include="Arm2Device.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="usb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Arm2Device.cpp" />
@@ -96,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libusb.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
