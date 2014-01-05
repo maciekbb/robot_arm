@@ -14,20 +14,25 @@ namespace Arm2DeviceTest
             if(device.Open() == true)
             {
                 Console.WriteLine("Device found");
-                device.LedOn();
-                System.Threading.Thread.Sleep(1000);
-                device.LedOff();
-                System.Threading.Thread.Sleep(1000);
-                device.LedOn();
-                System.Threading.Thread.Sleep(1000);
-                device.LedOff();
+                try
+                {
+                    while (true)
+                    {
+                        String sval = Console.ReadLine();
+                        double val = Convert.ToDouble(sval);
+                        device.MoveServo(1, val);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                } 
                 device.Close();
             }
             else
             {
                 Console.WriteLine("Device not found");
             }
-            Console.ReadLine();
         }
     }
 }

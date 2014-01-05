@@ -6,8 +6,7 @@
 
 static const int VID = 0x16C0;
 static const int PID = 0x1A0A;
-static const int SIG_LED_ON = 1;
-static const int SIG_LED_OFF = 2;
+static const int SIG_MOVE = 2;
 
 namespace Arm2
 {
@@ -39,6 +38,11 @@ namespace Arm2
 		return false;
 	}
 
+	bool Arm2Device::IsOpen()
+	{
+		return this->handle != NULL;
+	}
+
 	void Arm2Device::Close()
 	{
 		if(this->handle != NULL)
@@ -48,39 +52,18 @@ namespace Arm2
 		}
 	}
 
-	void Arm2Device::LedOn()
+	void Arm2Device::MoveServo(byte servoId, double position)
 	{
 		char buffer[256];
+		char pos = Convert::ToByte(position * 200);
 		int bytes = usb_control_msg(this->handle,
 			USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_ENDPOINT_IN,
-			SIG_LED_ON,
-			0,
-			0,
+			SIG_MOVE,
+			pos,
+			servoId,
 			buffer,
 			sizeof(buffer),
-			2000);
-
-		if(bytes > 0)
-		{
-			printf("Message: %s \n", buffer);
-		}
-		else
-		{
-			printf("Device don't respond\n");
-		}
-	}
-
-	void Arm2Device::LedOff()
-	{
-		char buffer[256];
-		int bytes = usb_control_msg(this->handle,
-			USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_ENDPOINT_IN,
-			SIG_LED_OFF,
-			0,
-			0,
-			buffer,
-			sizeof(buffer),
-			2000);
+			1000);
 
 		if(bytes > 0)
 		{

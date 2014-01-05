@@ -16,10 +16,9 @@ namespace Arm2
 	public:
 		Arm2Device();
 		bool Open();
+		bool IsOpen();
 		void Close();
 
-		//temp
-		void LedOn();
-		void LedOff();
+		void MoveServo(byte servoId, double position);
 	};
 }

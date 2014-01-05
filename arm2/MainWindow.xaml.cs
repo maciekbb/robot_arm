@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Arm2;
 
 namespace arm2
 {
@@ -24,25 +25,33 @@ namespace arm2
         private double transitionY = 0;
         private double betweenArmsAngle = 0;
         private double baseAngle = 0;
+        private Arm2Device device = new Arm2Device();
+        private double positionBase = 0.5;
+        private double positionFirst = 0;
+        private double positionSecond = 0;
 
         public MainWindow()
         {
             InitializeComponent();
+            device.Open();
         }
 
         private void Base_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             moveBase(e.NewValue);
+            positionBase = e.NewValue;
         }
 
         private void FirstArm_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MoveFirstArm(e.NewValue);
+            positionFirst = e.NewValue;
         }
 
         private void SecondArm_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MoveSecondArm(e.NewValue);
+            positionSecond = e.NewValue;
         }
 
         private void moveBase(double e)
@@ -88,6 +97,22 @@ namespace arm2
 
               armSideViewPolygon2.RenderTransform = allTransforms;
           }
+
+        private void moveDevice()
+        {
+            if (device.IsOpen())
+            {
+                device.MoveServo(1, positionBase);
+                device.MoveServo(2, positionFirst);
+                device.MoveServo(3, positionFirst);
+                device.MoveServo(4, positionSecond);
+            }
+        }
+
+        private void ButtonMove_Click(object sender, RoutedEventArgs e)
+        {
+            moveDevice();
+        }
     }
 
 }
