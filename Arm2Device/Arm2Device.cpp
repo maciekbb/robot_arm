@@ -1,11 +1,13 @@
 // This is the main DLL file.
 
 #include "stdafx.h"
-
 #include "Arm2Device.h"
+#include "stdio.h"
 
 static const int VID = 0x16C0;
 static const int PID = 0x1A0A;
+static const int SIG_LED_ON = 1;
+static const int SIG_LED_OFF = 2;
 
 namespace Arm2
 {
@@ -43,6 +45,50 @@ namespace Arm2
 		{
 			usb_close(this->handle);
 			this->handle = NULL;
+		}
+	}
+
+	void Arm2Device::LedOn()
+	{
+		char buffer[256];
+		int bytes = usb_control_msg(this->handle,
+			USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_ENDPOINT_IN,
+			SIG_LED_ON,
+			0,
+			0,
+			buffer,
+			sizeof(buffer),
+			2000);
+
+		if(bytes > 0)
+		{
+			printf("Message: %s \n", buffer);
+		}
+		else
+		{
+			printf("Device don't respond\n");
+		}
+	}
+
+	void Arm2Device::LedOff()
+	{
+		char buffer[256];
+		int bytes = usb_control_msg(this->handle,
+			USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_ENDPOINT_IN,
+			SIG_LED_OFF,
+			0,
+			0,
+			buffer,
+			sizeof(buffer),
+			2000);
+
+		if(bytes > 0)
+		{
+			printf("Message: %s \n", buffer);
+		}
+		else
+		{
+			printf("Device don't respond\n");
 		}
 	}
 }

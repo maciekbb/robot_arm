@@ -14,6 +14,13 @@ namespace Arm2DeviceTest
             if(device.Open() == true)
             {
                 Console.WriteLine("Device found");
+                device.LedOn();
+                System.Threading.Thread.Sleep(1000);
+                device.LedOff();
+                System.Threading.Thread.Sleep(1000);
+                device.LedOn();
+                System.Threading.Thread.Sleep(1000);
+                device.LedOff();
                 device.Close();
             }
             else

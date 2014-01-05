@@ -17,5 +17,9 @@ namespace Arm2
 		Arm2Device();
 		bool Open();
 		void Close();
+
+		//temp
+		void LedOn();
+		void LedOff();
 	};
 }
