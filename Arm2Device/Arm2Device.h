@@ -18,6 +18,7 @@ namespace Arm2
 		bool Open();
 		bool IsOpen();
 		void Close();
+		bool Ping();
 
 		void MoveServo(byte servoId, double position);
 	};

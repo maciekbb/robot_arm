@@ -26,6 +26,7 @@ namespace arm2
         private double betweenArmsAngle = 0;
         private double baseAngle = 0;
         private Arm2Device device = new Arm2Device();
+        private DeviceConnection deviceConnection;
         private double positionBase = 0.5;
         private double positionFirst = 0;
         private double positionSecond = 0;
@@ -34,6 +35,8 @@ namespace arm2
         {
             InitializeComponent();
             device.Open();
+            deviceConnection = new DeviceConnection(device, button_move, label_status);
+            deviceConnection.StartThread();
         }
 
         private void Base_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -113,6 +116,10 @@ namespace arm2
         {
             moveDevice();
         }
-    }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            deviceConnection.StopThread();
+        }
+    }
 }

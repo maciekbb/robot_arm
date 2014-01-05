@@ -52,6 +52,24 @@ namespace Arm2
 		}
 	}
 
+	bool Arm2Device::Ping()
+	{
+		char buffer[256];
+		int bytes = usb_control_msg(this->handle,
+			USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_ENDPOINT_IN,
+			SIG_MOVE,
+			0,
+			0,
+			buffer,
+			sizeof(buffer),
+			1000);
+
+		if(bytes > 0)
+			return true;
+		else
+			return false;
+	}
+
 	void Arm2Device::MoveServo(byte servoId, double position)
 	{
 		char buffer[256];
