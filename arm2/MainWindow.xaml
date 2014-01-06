@@ -52,7 +52,7 @@
                         <ScrollBar Orientation="Horizontal"  Margin="10" Width="450" ValueChanged="FirstArm_ValueChanged"/>
                         <Label>Second arm</Label>
                         <ScrollBar Orientation="Horizontal"  Margin="10" Width="450" ValueChanged="SecondArm_ValueChanged"/>
-                        <Button x:Name="button_move" Margin="10" Click="ButtonMove_Click">Move</Button>
+                        <Button x:Name="button_move" IsEnabled="False" Margin="10" Click="ButtonMove_Click">Move</Button>
                     </StackPanel>
                 </GroupBox>
 
